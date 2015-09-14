@@ -5,10 +5,12 @@
 
 ##Prerequisites
  - OOP concepts
- - Android Studio, SDK and Emulator 
- 	[http://developer.android.com/sdk/index.html](http://developer.android.com/sdk/index.html) 	
- - Java [JRE](http://java.com/en/download/) and [JDK 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) installed
- 
+ - Java [JRE](http://java.com/en/download/) installed
+ - [JDK 7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) installed
+ - Android Studio, SDK and Emulator
+ 	[http://developer.android.com/sdk/index.html](http://developer.android.com/sdk/index.html)
+  	 NOTE: Make sure you open up Android Studio before the workshop, as there is further set-up within the application, which may take some time to download.
+
 
 
 #Lets get Started!
@@ -17,7 +19,7 @@
 
 1. Open Android Studio select 'Start a new Android Studio Project', give it a name and choose where you want to save it. Package names are conventionally the reverse of your website domain (if you have one) in this case we could put `com.makersacademy`, but you can use anything you want.
 2. Next we'll be asked what kind of device we want our app to run on, 'Phone and Tablet' should be selected by default, and here we select the minimum version of Android we will require to run our device on. Lets choose 4.1 Jelly Bean, because life is just better when you target Jelly Bean and up.
-3. Now we will be asked to add an `Activity`. Our first UI screen. We can choose from a load of pre-baked implementations, but in this case we will create a 'Blank Activity'. 
+3. Now we will be asked to add an `Activity`. Our first UI screen. We can choose from a load of pre-baked implementations, but in this case we will create a 'Blank Activity'.
 4. We now provide 3 related names: Activity Name: the name of our Java class file defining our activity, Layout Name: the name of the XML file which defines the layout of this Activity. Title: The human name of the app to show at the top of the Activity when the app is running. Give the Title whatever name you want and leave the others. 'ToDo' might be a good one ;)
 4. Hit 'Finish' and you've just created your first Android project!
 
@@ -46,7 +48,7 @@ There are a few steps involved to get the app running on your phone. First we ne
 ###Running the app in the Emulator
 Lets get a simulator up and running so you can test your app.
 
-1. Under Tools - > Android in Android Studio select 'AVD Manager'
+1. Under Tools - > Android -> 'AVD Manager'
 2. Select Create Virtual Device from the bottom left
 3. Lets have a nice Nexus 5 to play with, select 'Nexus 5' from the phone category (confusingly, there are two, choose the one which says 'xxhdpi' under density)
 4. Now lets choose our system Image, which is what version of Android we want to run. Select `Marshmallow, API - 23, ABI - x86_64, Target - Google APIs`. Make sure you install the Intel HAXM when prompted, otherwise the emulator will be woefully slow and you will hate yourself for not doing it. If the `x86_64` is not shown, check the 'Show downloadable system images' box and download it. The `armeabi` is just incredibly slow and will take the entire evening to boot.
@@ -58,12 +60,14 @@ Lets get a simulator up and running so you can test your app.
 ###Our first app
 Behold! Hello, World on Android! Isn't it useless! We want to make it do something more exciting. But first lets have a look at what we have. Back in AS there should be two tabs open in the editor, one Java file, and one XML file.
 
+YCNote: Might want to point to the `Text` tab?
+
 First the Layout XML file
 
 	<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    	xmlns:tools="http://schemas.android.com/tools" 
+    	xmlns:tools="http://schemas.android.com/tools"
     	android:layout_width="match_parent"
-    	android:layout_height="match_parent" 
+    	android:layout_height="match_parent"
     	android:paddingLeft="@dimen/activity_horizontal_margin"
     	android:paddingRight="@dimen/activity_horizontal_margin"
     	android:paddingTop="@dimen/activity_vertical_margin"
@@ -93,31 +97,32 @@ It's pretty easy at this point to see what we want to do with this file. But fir
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.activity_main);
 	    }
-	
+
 	    @Override
 	    public boolean onCreateOptionsMenu(Menu menu) {
 	        // Inflate the menu; this adds items to the action bar if it is present.
 	        getMenuInflater().inflate(R.menu.menu_main, menu);
 	        return true;
 	    }
-	
+
 	    @Override
 	    public boolean onOptionsItemSelected(MenuItem item) {
 	        // Handle action bar item clicks here. The action bar will
 	        // automatically handle clicks on the Home/Up button, so long
 	        // as you specify a parent activity in AndroidManifest.xml.
 	        int id = item.getItemId();
-	
+
 	        //noinspection SimplifiableIfStatement
 	        if (id == R.id.action_settings) {
 	            return true;
 	        }
-	
+
 	        return super.onOptionsItemSelected(item);
 	    }
 	}
-	
-This is our Activity class, which inherits from `AppCompatActivity` a new(ish) variant of an `Activity` class which, as the name suggests allows for backwards COMPATibility of newer features, including Material Design elements, to older versions of Android.	
+
+This is our Activity class, which inherits from `AppCompatActivity` a new(ish) variant of an `Activity` class which, as the name suggests allows for backwards COMPATibility of newer features, including Material Design elements, to older versions of Android.
+
 We also have 3 functions that have been generated, the first and most important of these is the `onCreate` function. This is what's known as a 'lifecycle callback' function and this will be called when the activity is created by the system. There are multiple lifecycle callbacks which can be implemented to define behaviours based on certain app lifecycle events e.g. The user closes the app, the user resumes the app, the user pressed the back button. Here is the basic lifecycle of an activity:
 
 ![image](http://developer.android.com/images/activity_lifecycle.png)
@@ -131,6 +136,8 @@ Now lets get editing!
 ##Changing our layout
 
 Let's go back to our layout XML and modify it so we can use it for our ToDo list app. We will need 3 elements for our app, a list, an editable text area to type our items, and a button to save them.
+
+YCNote: If you get rid of the TextView, you don't have a template to copy for the other elements
 
 1. First, lets get rid of that `TextView`. In it's place, we will put a `ListView` element instead, set it's attributes so that it's width matches its parent and it's height also matches it parent - the `RelativeLayout`.
 2. After the `ListView` as the next child of the `RelativeLayout` create a new `EditText` element. This should also match it's parent in width, but set it's height to `wrap_content`.
@@ -147,12 +154,14 @@ Hmmmm. That's not great, everything is bunched up in the top left corner. That's
 1. The `EditText` below the list
 2. The `EditText` to the left of the `Button`
 
+YCNote: Might be a good place for a screenshot
+
 Lets add these in:
 
 1. In our `EditText` and `Button` add an attribute `android:layout_alignParentBottom="true"`
 2. In the `Button` add `android:layout_alignParentRight="true"`
 
-But we have a problem now. We want to set the remaining rules relative to each other, but first we need a way for one element to reference another. For this we use IDs. Sadly, this isn't just `id=bla`, it's a bit more verbose. Lets give our button an id `btn_add_todo_item` by adding the following attribute to the button: `android:id="@+id/btn_add_todo_item"`, now give the id `edit_new_item` to our `EditText` and `list_todos` to our `ListView`. 
+But we have a problem now. We want to set the remaining rules relative to each other, but first we need a way for one element to reference another. For this we use IDs. Sadly, this isn't just `id=bla`, it's a bit more verbose. Lets give our button an id `btn_add_todo_item` by adding the following attribute to the button: `android:id="@+id/btn_add_todo_item"`, now give the id `edit_new_item` to our `EditText` and `list_todos` to our `ListView`.
 
 (N.B. These ids generate the appropriate values in the `R` class, so we should now have access to our button via `R.id.btn_add_todo_item` in our Java class, this will come in handy later!)
 
@@ -170,6 +179,3 @@ Fit for the Play Store!!
 Now that our layout is done, lets write some actual code and give it some behaviour in our `Activity` Java class.
 
 ##Do some Activity!
-
-
-
