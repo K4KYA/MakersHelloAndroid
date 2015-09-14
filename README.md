@@ -42,7 +42,7 @@ There are a few steps involved to get the app running on your phone. First we ne
 7. Make sure 'USB debugging' is selected
 8. Plug your phone into your computer
 9. In Android Studio open up the 'Android' toolbar at the bottom of the window and make sure the 'logcat' tab is open. In the dropdown box, you should see your phone and all of the log messages from all the currently running apps you have will now be streaming in the logcat window!
-	![image](images/logcat.png =480x)
+	![image](./images/logcat.png =480x)
 10. Under the 'Run' Menu in Android Studio, select `Run 'app'`, this should install the app and run it on your phone!
 
 ###Running the app in the Emulator
@@ -52,7 +52,7 @@ Lets get an emulator up and running so you can test your app.
 2. Select Create Virtual Device from the bottom left
 3. Lets have a nice Nexus 5 to play with, select 'Nexus 5' from the phone category (confusingly, there are two, choose the one which says 'xxhdpi' under density)
 4. Now lets choose our system Image, which is what version of Android we want to run. Select `Marshmallow, API - 23, ABI - x86_64, Target - Google APIs`. Make sure you install the Intel HAXM when prompted, otherwise the emulator will be woefully slow and you will hate yourself for not doing it. If the `x86_64` is not shown, check the 'Show downloadable system images' box and download it. The `armeabi` is just incredibly slow and will take the entire evening to boot.
-	![image](images/AVD.png =640x)
+	![image](./images/AVD.png =640x)
 5. Click next and give your AVD (Android Virtual Device) a name, check the 'Use host GPU' option and click 'finish'
 6. Now start your emulator by clicking the play button in the right hand column of your new AVD. If it doesn't start properly make sure to close any other VMs you might be running.
 7. Under the 'Run' Menu in Android Studio, select `Run 'app'`, this should install your app and run it on your new AVD!
@@ -145,7 +145,7 @@ YCNote: If you get rid of the TextView, you don't have a template to copy for th
 
 Lets look at the preview window and see what we have:
 
-![image](images/preview_step1.png =480x)
+![image](./images/preview_step1.png =480x)
 
 Hmmmm. That's not great, everything is bunched up in the top left corner. That's because we are using a `RelativeLayout` as our container element. A `RelativeLayout` allows it's child elements to position themselves relative to their parent and/or other child elements. So lets add a few rules in so we can get this looking the way we want. In simple terms we want:
 
@@ -172,14 +172,14 @@ Now that all our view elements have ids, we can finish our layout rules.
 
 Lets have another look at our Preview:
 
-![image](images/preview_step2.png =480x)
+![image](./images/preview_step2.png =480x)
 
 Looking good!
 
 
 Our last task in XML is to create a resource which defines how each list element will look. In the Project Explorer, browse to the layout folder under the res folder. Right click on the folder and create a new layout resource file called `todo_list_item`.
 
-![image](images/todo_list_item.png =640x)
+![image](./images/todo_list_item.png =640x)
 
 This will have created another XML file for us (Yay!) with a root element of the `LinearLayout` variety. `LinearLayout` is `RelativeLayout`s little brother. It simply lays it's child elements out, either horizontally or vertically, in the order in which they are defined in the XML.
 
@@ -234,7 +234,7 @@ Let's get a reference in our code to the elements in our layout first.
  a few times, just make sure you call `setAdapter(adapter)` last. Then run the project!
  
  
-	![image](images/dummy_strings.png =480x)
+	![image](./images/dummy_strings.png =480x)
 
 	Nearly there!
 	
@@ -260,7 +260,7 @@ With the `ListView` working, the last thing to do is to accept input from the `E
 			
 	Now run the project, open the Android toolbar at the bottom of Android Studio and select the Logcat tab and click the button.
 	
-	![image](images/logcat2.png =640x)
+	![image](./images/logcat2.png =640x)
 	
 	If you can see the text in logcat, then your button is working!
 	
@@ -269,7 +269,7 @@ With the `ListView` working, the last thing to do is to accept input from the `E
 	2. Select Refactor -> Extract -> Field (note the keyboard shortcut!) and hit return to accept the name
 	3. Android Studio has done everything for us, including renaming the variable so it has a prefixed `m` since it's now an instance variable!
 	
-	![image](images/refactor.png =480x)
+	![image](./images/refactor.png =480x)
 	
 3. Now, lets finish this. Grab the text from the `EditText` and add it to the adapter. Inside `onClick` for the `Button` add:
 
