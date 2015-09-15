@@ -206,6 +206,7 @@ Let's get a reference in our code to the elements in our layout first.
     		ListView mListViewTodos;
     		EditText mEditNewTodo;
 	By convention, we prefix instance variables with `m`, to avoid scope ambiguity anywhere in the class.
+	When you first type `Button`, `ListView` or some other type that is new to the class, you need to import it. Android Studio probably highlighted these words in red and suggested you press alt-Enter. It’s red, because the class wasn’t imported, but alt-enter does the recommended fix and imports the class.
 	
 1. Inside our onCreate function we will provide values to these variables by getting references to our XML views using the `R` class. E.g. for the button:
 
@@ -218,14 +219,16 @@ Let's get a reference in our code to the elements in our layout first.
 4. Now we will create an `Adapter` to hold our todo items and apply it to our `ListView`. We will use an `ArrayAdapter` since we are adapting an Array. 
 	> "But how does our `Adapter` know what type is in our Array?"  - you ask. 
 	
-	A good question. An `ArrayAdapter` is whats known as a Generic Container. That is it can work with any type, we just have to provide a type to it when we define it and it will set itself up appropriately. Let's create it now. Inside onCreateView add:
+	A good question. An `ArrayAdapter` is whats known as a Generic Container. That is, it can work with any type, we just have to provide a type to it when we define it and it will set itself up appropriately. Let's create it now. Inside onCreateView add:
 	
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.todo_list_item, R.id.txt_todo_item);
 		
 	
-	The parameters we provided were a `Context` which represents the current `Activity`, the layout which defined our list item look and the id for the `TextView` inside that layout, which you defined above. 
+	The parameters we provided were a `Context` which represents the current `Activity`, the layout which defined our list item look and the id for the `TextView` inside that layout to hold our todo String, which you defined above. 
 
 	Here our generic type is defined inside the angle brackets. The awesome thing about Generics is that it works... generically. This Adapter only had to be written once, but will work with any type we give it, including a custom type of our own!
+	
+	Note: The adapter we are using is a very basic adapter to get us started, when it comes to more complicated views with more than just a `TextView` in them, we will need to create our own `Adapter`, which will inherit from one of the `Adapter` family of classes and define how the list item layout will be populated.
 	
 	
 5. Now, after this, lets set our `ListView` to use our adapter
@@ -269,7 +272,7 @@ With the `ListView` working, the last thing to do is to accept input from the `E
 2. Lets grab the current text from the `EditText` and add it to the adapter inside this function. But first, we need to do one thing. So that we can access our adapter without making it `final` (immutable/unchangable) we need to change it so that it is an instance variable of the class, rather than a local variable inside `onCreate`. But don't go copy-pasting yet, Android Studio has us covered. 
 	1. Go to the definition of adapter and right click the variable name.
 	2. Select Refactor -> Extract -> Field (note the keyboard shortcut!) and hit return to accept the name
-	3. Android Studio has done everything for us, including renaming the variable so it has a prefixed `m` since it's now an instance variable!
+	3. Android Studio has done everything for us, including renaming the variable so it has a prefixed `m` since it's now an instance variable! (If it hasn't prefixed the `m`, the code style is probably not selected in the IDE settings, no big deal; Right click the variable name, Refactor -> Rename and it will rename all occurences)
 	
 	<img src="./images/refactor.png" style="width:480px;">
 	
@@ -286,18 +289,22 @@ With the `ListView` working, the last thing to do is to accept input from the `E
 
 		mEditNewTodo.setText("");
 		
+6. I think you'll agree that our onCreate function is getting a bit bloated. Lets do some housekeeping and trim it down a bit. Let's pull all the `findViewById` calls into a function called `bindViews` but rather than wasting time copy-pasting, lets use the power of the IDE to clean this up for us. 
+	7. Highlight the three lines containing `findViewById` right click on the selected text and choose Refactor -> Extract -> Method. Give it the name `bindViews` and hit return. BOOM! AS has pulled those lines into a function and put the call to that function in their place!
+	8. The click listener assigner is looking a bit ugly as well. Right click on the `new View.OnClickListener` select 'Refactor' -> 'Convert anonymous to inner', and give it a name. That's neatened things up with very little effort from us!
+		
 6. We're done! We created a blank Activity in Android Studio, built our layouts in XML, wired it up to our Java code and ran it on our phone! (or emulator)
 
 
 ##Extra Credit
 
-2. Add a text hint to the `EditText`
+2. Add a text hint (placeholder text) to the `EditText` (XML)
 
-4. Add validation to our button `onClick` so that we don't add blank todo items.
+4. Add validation to our button `onClick` so that we don't add blank todo items. (Java)
 
-3. Add an `onItemLongClickListener` to the `ListView` and make it remove the item that was long pressed on.
+3. Add an `onItemLongClickListener` to the `ListView` and make it remove the item that was long pressed on. (Java)
 
-1. Make each list view item a bit prettier. Change the text size? Change the text colour? Add some padding? When adjusting sizes, specify font sizes in `sp` and distances in `dp` instead of `px` or `em`. `sp` and `dp` are independant of pixel density and so scales appropriately with different screen sizes and pixel densities. (`dp` - formerly `dip` - means "density independant pixels")
+1. Make each list view item a bit prettier. Change the text size? Change the text colour? Add some padding? When adjusting sizes, specify font sizes in `sp` and distances in `dp` instead of `px` or `em`. `sp` and `dp` are independant of pixel density and so scales appropriately with different screen sizes and pixel densities. (`dp` - formerly `dip` - means "density independant pixels") (XML)
 	
 
 
