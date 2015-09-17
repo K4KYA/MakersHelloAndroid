@@ -314,10 +314,9 @@ With the `ListView` working, the last thing to do is to accept input from the `E
  - AndroidChat Slack channel - [http://androidchat.co/](http://androidchat.co/)
  - Fragmented Podcast - An awesome Android Developer Podcast - [http://fragmentedpodcast.com/](http://fragmentedpodcast.com/)
  - Square - These guys build the best Android libraries. Period. [https://github.com/square](https://github.com/square)
- - 
-	
-
-
+ - Android Design Patterns - [http://www.androiddesignpatterns.com](http://www.androiddesignpatterns.com/)
+ - Android Arsenal - a portal for finding libraries tools and apps related to android dev [https://android-arsenal.com/](https://android-arsenal.com/)
+ - Android Weekly - a weekly email newsletter packed with all things Android [http://androidweekly.net/](http://androidweekly.net/)
 
 
 
