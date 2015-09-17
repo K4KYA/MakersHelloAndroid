@@ -305,7 +305,18 @@ With the `ListView` working, the last thing to do is to accept input from the `E
 3. Add an `onItemLongClickListener` to the `ListView` and make it remove the item that was long pressed on. (Java)
 
 1. Make each list view item a bit prettier. Change the text size? Change the text colour? Add some padding? When adjusting sizes, specify font sizes in `sp` and distances in `dp` instead of `px` or `em`. `sp` and `dp` are independant of pixel density and so scales appropriately with different screen sizes and pixel densities. (`dp` - formerly `dip` - means "density independant pixels") (XML)
+
+
+##Further Resources
+
+ - Android Developer Docs - [http://developer.android.com](http://developer.android.com)
+ - Android Developers on YouTube [https://www.youtube.com/user/androiddevelopers](https://www.youtube.com/user/androiddevelopers)
+ - AndroidChat Slack channel - [http://androidchat.co/](http://androidchat.co/)
+ - Fragmented Podcast - An awesome Android Developer Podcast - [http://fragmentedpodcast.com/](http://fragmentedpodcast.com/)
+ - Square - These guys build the best Android libraries. Period. [https://github.com/square](https://github.com/square)
+ - 
 	
+
 
 
 
